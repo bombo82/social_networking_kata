@@ -1,16 +1,16 @@
 package it.giannibombelli.social_networking_kata
 
-import it.giannibombelli.social_networking_kata.user_interface.UserInterface
+import it.giannibombelli.social_networking_kata.user_interface.iConsole
 
-class SocialNetworking(val userInterface: UserInterface) {
+class SocialNetworking(private val iConsole: iConsole) {
 
     fun commandLoop() {
         do {
-            val read = userInterface.read()
-            userInterface.write(read)
+            val read = iConsole.read()
+            iConsole.writeLine(read)
         } while (read != "QUIT")
 
-        userInterface.write("Bye")
+        iConsole.writeLine("Bye")
     }
 
 }
