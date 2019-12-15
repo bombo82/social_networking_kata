@@ -4,9 +4,10 @@ import com.nhaarman.mockitokotlin2.inOrder
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
-import it.giannibombelli.social_networking_kata.CommandExecutor
 import it.giannibombelli.social_networking_kata.SocialNetworking
 import it.giannibombelli.social_networking_kata.command.SocialNetworkingCommandFactory
+import it.giannibombelli.social_networking_kata.repository.UserRepository
+import it.giannibombelli.social_networking_kata.user_interface.CommandExecutor
 import it.giannibombelli.social_networking_kata.user_interface.UserInterface
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.gherkin.Feature
@@ -16,7 +17,7 @@ object PostFeature : Spek({
     val QUIT_INPUT = "QUIT"
 
     Feature("Post") {
-        val commandFactory = SocialNetworkingCommandFactory()
+        val commandFactory = SocialNetworkingCommandFactory(UserRepository())
         val commandExecutor = CommandExecutor(commandFactory)
 
         Scenario("Bob can view Alice's timeline") {
