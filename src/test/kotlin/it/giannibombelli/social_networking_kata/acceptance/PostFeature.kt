@@ -6,6 +6,7 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import it.giannibombelli.social_networking_kata.CommandExecutor
 import it.giannibombelli.social_networking_kata.SocialNetworking
+import it.giannibombelli.social_networking_kata.command.SocialNetworkingCommandFactory
 import it.giannibombelli.social_networking_kata.user_interface.UserInterface
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.gherkin.Feature
@@ -15,6 +16,8 @@ object PostFeature : Spek({
     val QUIT_INPUT = "QUIT"
 
     Feature("Post") {
+        val commandFactory = SocialNetworkingCommandFactory()
+        val commandExecutor = CommandExecutor(commandFactory)
 
         Scenario("Bob can view Alice's timeline") {
             val userInterface = mock<UserInterface>()
@@ -22,7 +25,6 @@ object PostFeature : Spek({
             val post = "I love the weather today"
 
             Given("Alice posts messages") {
-                val commandExecutor = CommandExecutor()
                 commandExecutor.execute("Alice -> $post")
             }
             When("Bob reads Alice's messages") {
@@ -45,9 +47,8 @@ object PostFeature : Spek({
             )
 
             Given("Bob posts messages") {
-                val commandExecutor = CommandExecutor()
-                commandExecutor.execute("Bob -> $postList[0]")
-                commandExecutor.execute("Bob -> $postList[1]")
+                commandExecutor.execute("Bob -> ${postList[0]}")
+                commandExecutor.execute("Bob -> ${postList[1]}")
             }
             When("Alice reads Bob's messages") {
                 whenever(userInterface.read())

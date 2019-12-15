@@ -1,8 +1,11 @@
 package it.giannibombelli.social_networking_kata
 
-class CommandExecutor {
+import it.giannibombelli.social_networking_kata.command.CommandFactory
+
+class CommandExecutor(private val commandFactory: CommandFactory) {
     fun execute(userCommand: String) {
-        // TODO("not implemented")
+        val command = commandFactory.commandFor(userCommand)
+        command.execute()
     }
 
 }
