@@ -3,11 +3,19 @@ package it.giannibombelli.social_networking_kata.repository
 import it.giannibombelli.social_networking_kata.domain.User
 
 class UserRepository : Repository<User> {
+    val users = mutableListOf<User>()
+
     override fun getOrCreate(userName: String): User {
-        TODO("not implemented")
+        val user = get(userName)
+        if (user == null) {
+            val newUser = User(userName, mutableListOf())
+            users.add(newUser)
+            return newUser
+        }
+        return user
     }
 
     override fun get(userName: String): User? {
-        TODO("not implemented")
+        return users.find { it.name == userName }
     }
 }
