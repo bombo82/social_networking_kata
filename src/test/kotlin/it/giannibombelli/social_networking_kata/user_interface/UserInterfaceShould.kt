@@ -54,4 +54,14 @@ internal class UserInterfaceShould {
 
         assertEquals("Ciao Bombo", userInterface.input())
     }
+
+    @Test
+    fun displayShortNotice() {
+        val console = mock<iConsole>()
+        val postFormatter = mock<iPostFormatter>()
+
+        UserInterface(console, postFormatter)
+
+        verify(console).writeLine(UserInterface.SHORT_NOTICE)
+    }
 }
