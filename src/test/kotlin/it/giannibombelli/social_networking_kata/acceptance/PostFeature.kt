@@ -7,7 +7,10 @@ import com.nhaarman.mockitokotlin2.whenever
 import it.giannibombelli.social_networking_kata.SocialNetworking
 import it.giannibombelli.social_networking_kata.command.SocialNetworkingCommandFactory
 import it.giannibombelli.social_networking_kata.repository.UserRepository
-import it.giannibombelli.social_networking_kata.user_interface.*
+import it.giannibombelli.social_networking_kata.user_interface.CommandExecutor
+import it.giannibombelli.social_networking_kata.user_interface.PostFormatter
+import it.giannibombelli.social_networking_kata.user_interface.UserInterface
+import it.giannibombelli.social_networking_kata.user_interface.iConsole
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.gherkin.Feature
 
@@ -20,7 +23,7 @@ object PostFeature : Spek({
         val userInterface = UserInterface(console, PostFormatter())
         val commandFactory = SocialNetworkingCommandFactory(UserRepository(), userInterface)
         val commandExecutor = CommandExecutor(commandFactory)
-        val socialNetworking = SocialNetworking(console)
+        val socialNetworking = SocialNetworking(userInterface, commandExecutor)
 
         Scenario("Bob can view Alice's timeline") {
             val post = "I love the weather today"

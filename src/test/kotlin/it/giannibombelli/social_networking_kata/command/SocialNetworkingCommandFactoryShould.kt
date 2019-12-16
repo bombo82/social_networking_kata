@@ -4,7 +4,8 @@ import it.giannibombelli.social_networking_kata.repository.UserRepository
 import it.giannibombelli.social_networking_kata.user_interface.Console
 import it.giannibombelli.social_networking_kata.user_interface.PostFormatter
 import it.giannibombelli.social_networking_kata.user_interface.UserInterface
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 internal class SocialNetworkingCommandFactoryShould {
@@ -13,7 +14,7 @@ internal class SocialNetworkingCommandFactoryShould {
     private val commandFactory = SocialNetworkingCommandFactory(UserRepository(), userInterface)
 
     @Test
-    fun createPostCommand() {
+    fun create_postCommand() {
         val command = commandFactory.commandFor("Bombo -> Hello")
 
         assertNotNull(command)
@@ -21,10 +22,18 @@ internal class SocialNetworkingCommandFactoryShould {
     }
 
     @Test
-    fun readTimelineCommand() {
+    fun create_readTimelineCommand() {
         val command = commandFactory.commandFor("Bombo")
 
         assertNotNull(command)
         assertTrue(command is ReadTimelineCommand)
+    }
+
+    @Test
+    fun create_quitCommand() {
+        val command = commandFactory.commandFor("QUIT")
+
+        assertNotNull(command)
+        assertTrue(command is QuitCommand)
     }
 }

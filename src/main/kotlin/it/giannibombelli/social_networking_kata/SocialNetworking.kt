@@ -1,16 +1,19 @@
 package it.giannibombelli.social_networking_kata
 
-import it.giannibombelli.social_networking_kata.user_interface.iConsole
+import it.giannibombelli.social_networking_kata.command.Command
+import it.giannibombelli.social_networking_kata.command.QuitCommand
+import it.giannibombelli.social_networking_kata.user_interface.iCommandExecutor
+import it.giannibombelli.social_networking_kata.user_interface.iUserInterface
 
-class SocialNetworking(private val iConsole: iConsole) {
+class SocialNetworking(private val userInterface: iUserInterface, private val commandExecutor: iCommandExecutor) {
 
-    fun commandLoop() {
+    fun commandLoop(): Command {
+        var command: Command?
         do {
-            val read = iConsole.read()
-            iConsole.writeLine(read)
-        } while (read != "QUIT")
+            command = commandExecutor.execute(userInterface.input())
+        } while (command !is QuitCommand)
 
-        iConsole.writeLine("Bye")
+        return command
     }
 
 }
