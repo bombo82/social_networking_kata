@@ -11,8 +11,8 @@ class SocialNetworkingCommandFactory(
         private val clock: iClock
 ) : CommandFactory {
 
-    val POST_COMMAND_PATTERN = Regex(".*\\s->\\s.*")
-    val QUIT_COMMAND_PATTERN = Regex("QUIT")
+    private val POST_COMMAND_PATTERN = Regex(".*\\s->\\s.*")
+    private val QUIT_COMMAND_PATTERN = Regex("QUIT")
 
     override fun commandFor(userCommand: String): Command {
         return when {

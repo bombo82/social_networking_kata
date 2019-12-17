@@ -17,7 +17,7 @@ class PostCommand(
     }
 
     companion object {
-        const val SEPARATOR = " -> ";
+        const val SEPARATOR = " -> "
     }
 
 }

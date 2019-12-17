@@ -14,7 +14,7 @@ internal class UserInterfaceShould {
         val console = mock<iConsole>()
         val postFormatter = mock<iPostFormatter>()
         whenever(postFormatter.format(any()))
-                .thenAnswer({ (it.getArgument(0) as Post).message })
+                .thenAnswer { (it.getArgument(0) as Post).message }
         val now = LocalDateTime.now()
         val clock = mock<iClock>()
         whenever(clock.now())
