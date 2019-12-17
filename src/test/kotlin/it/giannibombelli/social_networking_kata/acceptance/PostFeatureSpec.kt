@@ -16,7 +16,7 @@ import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.gherkin.Feature
 import java.time.LocalDateTime
 
-object PostFeature : Spek({
+object PostFeatureSpec : Spek({
 
     val QUIT_INPUT = "QUIT"
 
