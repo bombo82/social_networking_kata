@@ -4,9 +4,9 @@ import com.nhaarman.mockitokotlin2.inOrder
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
-import it.giannibombelli.social_networking_kata.Clock
 import it.giannibombelli.social_networking_kata.SocialNetworking
 import it.giannibombelli.social_networking_kata.command.SocialNetworkingCommandFactory
+import it.giannibombelli.social_networking_kata.iClock
 import it.giannibombelli.social_networking_kata.repository.UserRepository
 import it.giannibombelli.social_networking_kata.user_interface.CommandExecutor
 import it.giannibombelli.social_networking_kata.user_interface.PostFormatter
@@ -14,20 +14,27 @@ import it.giannibombelli.social_networking_kata.user_interface.UserInterface
 import it.giannibombelli.social_networking_kata.user_interface.iConsole
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.gherkin.Feature
+import java.time.LocalDateTime
 
 object PostFeature : Spek({
 
     val QUIT_INPUT = "QUIT"
 
     Feature("Post") {
-        val console = mock<iConsole>()
-        val clock = Clock()
-        val userInterface = UserInterface(console, PostFormatter(clock))
-        val commandFactory = SocialNetworkingCommandFactory(UserRepository(), userInterface, clock)
-        val commandExecutor = CommandExecutor(commandFactory)
-        val socialNetworking = SocialNetworking(userInterface, commandExecutor)
 
         Scenario("Bob can view Alice's timeline") {
+            val clock = mock<iClock>()
+            val now = LocalDateTime.now()
+            val console = mock<iConsole>()
+            val userInterface = UserInterface(console, PostFormatter(clock))
+            val commandFactory = SocialNetworkingCommandFactory(UserRepository(), userInterface, clock)
+            val commandExecutor = CommandExecutor(commandFactory)
+            val socialNetworking = SocialNetworking(userInterface, commandExecutor)
+
+            whenever(clock.now())
+                    .thenReturn(now.minusMinutes(5))
+                    .thenReturn(now)
+
             val post = "I love the weather today"
 
             Given("Alice posts messages") {
@@ -45,6 +52,19 @@ object PostFeature : Spek({
         }
 
         Scenario("Alice can view Bob's timeline") {
+            val clock = mock<iClock>()
+            val now = LocalDateTime.now()
+            val console = mock<iConsole>()
+            val userInterface = UserInterface(console, PostFormatter(clock))
+            val commandFactory = SocialNetworkingCommandFactory(UserRepository(), userInterface, clock)
+            val commandExecutor = CommandExecutor(commandFactory)
+            val socialNetworking = SocialNetworking(userInterface, commandExecutor)
+
+            whenever(clock.now())
+                    .thenReturn(now.minusMinutes(2))
+                    .thenReturn(now.minusMinutes(1))
+                    .thenReturn(now)
+
             val postList = listOf(
                     "Damn! We lost!",
                     "Good game though."
