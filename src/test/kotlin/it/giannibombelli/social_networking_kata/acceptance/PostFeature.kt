@@ -6,12 +6,12 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import it.giannibombelli.social_networking_kata.SocialNetworking
 import it.giannibombelli.social_networking_kata.command.SocialNetworkingCommandFactory
-import it.giannibombelli.social_networking_kata.iClock
+import it.giannibombelli.social_networking_kata.IClock
 import it.giannibombelli.social_networking_kata.repository.UserRepository
 import it.giannibombelli.social_networking_kata.user_interface.CommandExecutor
 import it.giannibombelli.social_networking_kata.user_interface.PostFormatter
 import it.giannibombelli.social_networking_kata.user_interface.UserInterface
-import it.giannibombelli.social_networking_kata.user_interface.iConsole
+import it.giannibombelli.social_networking_kata.user_interface.IConsole
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.gherkin.Feature
 import java.time.LocalDateTime
@@ -23,9 +23,9 @@ object PostFeature : Spek({
     Feature("Post") {
 
         Scenario("Bob can view Alice's timeline") {
-            val clock = mock<iClock>()
+            val clock = mock<IClock>()
             val now = LocalDateTime.now()
-            val console = mock<iConsole>()
+            val console = mock<IConsole>()
             val userInterface = UserInterface(console, PostFormatter(clock))
             val commandFactory = SocialNetworkingCommandFactory(UserRepository(), userInterface, clock)
             val commandExecutor = CommandExecutor(commandFactory)
@@ -52,9 +52,9 @@ object PostFeature : Spek({
         }
 
         Scenario("Alice can view Bob's timeline") {
-            val clock = mock<iClock>()
+            val clock = mock<IClock>()
             val now = LocalDateTime.now()
-            val console = mock<iConsole>()
+            val console = mock<IConsole>()
             val userInterface = UserInterface(console, PostFormatter(clock))
             val commandFactory = SocialNetworkingCommandFactory(UserRepository(), userInterface, clock)
             val commandExecutor = CommandExecutor(commandFactory)

@@ -2,13 +2,13 @@ package it.giannibombelli.social_networking_kata.user_interface
 
 import it.giannibombelli.social_networking_kata.domain.Post
 
-interface iUserInterface {
+interface IUserInterface {
     fun display(posts: List<Post>)
     fun display(message: String)
     fun input(): String
 }
 
-class UserInterface(private val console: iConsole, private val postFormatter: iPostFormatter) : iUserInterface {
+class UserInterface(private val console: IConsole, private val postFormatter: IPostFormatter) : IUserInterface {
 
     init {
         console.writeLine(SHORT_NOTICE)

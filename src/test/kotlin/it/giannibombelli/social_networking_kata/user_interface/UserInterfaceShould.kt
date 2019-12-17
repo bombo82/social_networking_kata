@@ -2,7 +2,7 @@ package it.giannibombelli.social_networking_kata.user_interface
 
 import com.nhaarman.mockitokotlin2.*
 import it.giannibombelli.social_networking_kata.domain.Post
-import it.giannibombelli.social_networking_kata.iClock
+import it.giannibombelli.social_networking_kata.IClock
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 import kotlin.test.assertEquals
@@ -11,12 +11,12 @@ internal class UserInterfaceShould {
 
     @Test
     fun printFormattedPostsInReverseOrder() {
-        val console = mock<iConsole>()
-        val postFormatter = mock<iPostFormatter>()
+        val console = mock<IConsole>()
+        val postFormatter = mock<IPostFormatter>()
         whenever(postFormatter.format(any()))
                 .thenAnswer { (it.getArgument(0) as Post).message }
         val now = LocalDateTime.now()
-        val clock = mock<iClock>()
+        val clock = mock<IClock>()
         whenever(clock.now())
                 .thenReturn(now)
 
@@ -34,8 +34,8 @@ internal class UserInterfaceShould {
 
     @Test
     fun displayMessage() {
-        val console = mock<iConsole>()
-        val postFormatter = mock<iPostFormatter>()
+        val console = mock<IConsole>()
+        val postFormatter = mock<IPostFormatter>()
 
         val userInterface = UserInterface(console, postFormatter)
         userInterface.display("Bye Bye")
@@ -45,8 +45,8 @@ internal class UserInterfaceShould {
 
     @Test
     fun printConsolePrompt() {
-        val console = mock<iConsole>()
-        val postFormatter = mock<iPostFormatter>()
+        val console = mock<IConsole>()
+        val postFormatter = mock<IPostFormatter>()
 
         UserInterface(console, postFormatter).input()
         verify(console).write(UserInterface.PROMPT)
@@ -54,10 +54,10 @@ internal class UserInterfaceShould {
 
     @Test
     fun readConsoleInput() {
-        val console = mock<iConsole>()
+        val console = mock<IConsole>()
         whenever(console.read())
                 .thenReturn("Ciao Bombo")
-        val postFormatter = mock<iPostFormatter>()
+        val postFormatter = mock<IPostFormatter>()
         val userInterface = UserInterface(console, postFormatter)
 
         assertEquals("Ciao Bombo", userInterface.input())
@@ -65,8 +65,8 @@ internal class UserInterfaceShould {
 
     @Test
     fun displayShortNotice() {
-        val console = mock<iConsole>()
-        val postFormatter = mock<iPostFormatter>()
+        val console = mock<IConsole>()
+        val postFormatter = mock<IPostFormatter>()
 
         UserInterface(console, postFormatter)
 

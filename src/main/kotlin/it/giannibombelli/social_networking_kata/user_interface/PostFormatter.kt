@@ -1,15 +1,15 @@
 package it.giannibombelli.social_networking_kata.user_interface
 
 import it.giannibombelli.social_networking_kata.domain.Post
-import it.giannibombelli.social_networking_kata.iClock
+import it.giannibombelli.social_networking_kata.IClock
 import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 
-interface iPostFormatter {
+interface IPostFormatter {
     fun format(post: Post): String
 }
 
-class PostFormatter(private val clock: iClock) : iPostFormatter {
+class PostFormatter(private val clock: IClock) : IPostFormatter {
 
     override fun format(post: Post): String {
         return "${post.message} (${formatElapsedTime(post.dateTime)})"

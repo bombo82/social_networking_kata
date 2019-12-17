@@ -4,7 +4,7 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import it.giannibombelli.social_networking_kata.domain.Post
 import it.giannibombelli.social_networking_kata.domain.User
-import it.giannibombelli.social_networking_kata.iClock
+import it.giannibombelli.social_networking_kata.IClock
 import it.giannibombelli.social_networking_kata.repository.Repository
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
@@ -19,7 +19,7 @@ internal class PostCommandShould {
         whenever(userRepository.getOrCreate("Bombo"))
                 .thenReturn(user)
         val now = LocalDateTime.now()
-        val clock = mock<iClock>()
+        val clock = mock<IClock>()
         whenever(clock.now())
                 .thenReturn(now)
 

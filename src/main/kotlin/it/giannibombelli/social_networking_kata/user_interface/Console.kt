@@ -1,6 +1,6 @@
 package it.giannibombelli.social_networking_kata.user_interface
 
-interface iConsole {
+interface IConsole {
 
     fun write(message: String)
 
@@ -10,7 +10,7 @@ interface iConsole {
 
 }
 
-class Console : iConsole {
+class Console : IConsole {
 
     override fun write(message: String) {
         print(message)

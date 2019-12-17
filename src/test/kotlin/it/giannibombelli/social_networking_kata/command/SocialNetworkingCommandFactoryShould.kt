@@ -2,7 +2,7 @@ package it.giannibombelli.social_networking_kata.command
 
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
-import it.giannibombelli.social_networking_kata.iClock
+import it.giannibombelli.social_networking_kata.IClock
 import it.giannibombelli.social_networking_kata.repository.UserRepository
 import it.giannibombelli.social_networking_kata.user_interface.Console
 import it.giannibombelli.social_networking_kata.user_interface.PostFormatter
@@ -15,7 +15,7 @@ import java.time.LocalDateTime
 
 internal class SocialNetworkingCommandFactoryShould {
     private val now = LocalDateTime.now()
-    private val clock = mock<iClock>()
+    private val clock = mock<IClock>()
     private val userInterface = UserInterface(Console(), PostFormatter(clock))
     private val commandFactory = SocialNetworkingCommandFactory(UserRepository(), userInterface, clock)
 
