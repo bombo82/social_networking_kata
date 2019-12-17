@@ -15,7 +15,7 @@ class UserInterface(private val console: iConsole, private val postFormatter: iP
     }
 
     override fun display(posts: List<Post>) {
-        posts.forEach {
+        posts.asReversed().forEach {
             val message = postFormatter.format(it)
             console.writeLine("$PROMPT$message")
         }

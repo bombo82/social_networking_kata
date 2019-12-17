@@ -10,23 +10,25 @@ import kotlin.test.assertEquals
 internal class UserInterfaceShould {
 
     @Test
-    fun printFormattedPosts() {
+    fun printFormattedPostsInReverseOrder() {
         val console = mock<iConsole>()
         val postFormatter = mock<iPostFormatter>()
-        whenever(postFormatter.format(any<Post>()))
-                .thenReturn("Hello")
-                .thenReturn("My name is Bombo")
+        whenever(postFormatter.format(any()))
+                .thenAnswer({ (it.getArgument(0) as Post).message })
         val now = LocalDateTime.now()
         val clock = mock<iClock>()
         whenever(clock.now())
                 .thenReturn(now)
 
         val userInterface = UserInterface(console, postFormatter)
-        userInterface.display(listOf(Post("Hello", now), Post("My name is Bombo", now)))
+        userInterface.display(listOf(
+                Post("Hello", now),
+                Post("My name is Bombo", now))
+        )
 
         inOrder(console) {
-            verify(console).writeLine("${UserInterface.PROMPT}Hello")
             verify(console).writeLine("${UserInterface.PROMPT}My name is Bombo")
+            verify(console).writeLine("${UserInterface.PROMPT}Hello")
         }
     }
 
