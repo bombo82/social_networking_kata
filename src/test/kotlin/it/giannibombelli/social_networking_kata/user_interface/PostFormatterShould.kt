@@ -30,13 +30,14 @@ internal class PostFormatterShould {
                 Post("Hello Uncle", now.minusDays(20))
         )
 
-        assertEquals("Hello Uncle (1 second)", postFormatter.format(posts[0]))
-        assertEquals("Hello Uncle (5 seconds)", postFormatter.format(posts[1]))
-        assertEquals("Hello Uncle (1 minute)", postFormatter.format(posts[2]))
-        assertEquals("Hello Uncle (10 minutes)", postFormatter.format(posts[3]))
-        assertEquals("Hello Uncle (1 hour)", postFormatter.format(posts[4]))
-        assertEquals("Hello Uncle (10 hours)", postFormatter.format(posts[5]))
-        assertEquals("Hello Uncle (1 day)", postFormatter.format(posts[6]))
-        assertEquals("Hello Uncle (20 days)", postFormatter.format(posts[7]))
+        assertEquals("Hello Uncle (now)", postFormatter.format(posts[0]))
+        assertEquals("Hello Uncle (1 second ago)", postFormatter.format(posts[1]))
+        assertEquals("Hello Uncle (5 seconds ago)", postFormatter.format(posts[2]))
+        assertEquals("Hello Uncle (1 minute ago)", postFormatter.format(posts[3]))
+        assertEquals("Hello Uncle (10 minutes ago)", postFormatter.format(posts[4]))
+        assertEquals("Hello Uncle (1 hour ago)", postFormatter.format(posts[5]))
+        assertEquals("Hello Uncle (15 hours ago)", postFormatter.format(posts[6]))
+        assertEquals("Hello Uncle (1 day ago)", postFormatter.format(posts[7]))
+        assertEquals("Hello Uncle (20 days ago)", postFormatter.format(posts[8]))
     }
 }
