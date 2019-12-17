@@ -2,7 +2,9 @@ package it.giannibombelli.social_networking_kata.user_interface
 
 import com.nhaarman.mockitokotlin2.*
 import it.giannibombelli.social_networking_kata.domain.Post
+import it.giannibombelli.social_networking_kata.iClock
 import org.junit.jupiter.api.Test
+import java.time.LocalDateTime
 import kotlin.test.assertEquals
 
 internal class UserInterfaceShould {
@@ -14,9 +16,13 @@ internal class UserInterfaceShould {
         whenever(postFormatter.format(any<Post>()))
                 .thenReturn("Hello")
                 .thenReturn("My name is Bombo")
+        val now = LocalDateTime.now()
+        val clock = mock<iClock>()
+        whenever(clock.now())
+                .thenReturn(now)
 
         val userInterface = UserInterface(console, postFormatter)
-        userInterface.display(listOf(Post("Hello"), Post("My name is Bombo")))
+        userInterface.display(listOf(Post("Hello", now), Post("My name is Bombo", now)))
 
         inOrder(console) {
             verify(console).writeLine("${UserInterface.PROMPT}Hello")

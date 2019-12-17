@@ -8,8 +8,10 @@ import it.giannibombelli.social_networking_kata.user_interface.PostFormatter
 import it.giannibombelli.social_networking_kata.user_interface.UserInterface
 
 fun main() {
-    val userInterface = UserInterface(Console(), PostFormatter())
-    val commandFactory = SocialNetworkingCommandFactory(UserRepository(), userInterface)
+    val clock = Clock()
+    val postFormatter = PostFormatter(clock)
+    val userInterface = UserInterface(Console(), postFormatter)
+    val commandFactory = SocialNetworkingCommandFactory(UserRepository(), userInterface, clock)
     val commandExecutor = CommandExecutor(commandFactory)
 
     SocialNetworking(userInterface, commandExecutor).commandLoop()

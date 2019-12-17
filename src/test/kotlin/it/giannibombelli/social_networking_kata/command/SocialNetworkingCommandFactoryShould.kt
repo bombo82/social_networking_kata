@@ -1,17 +1,29 @@
 package it.giannibombelli.social_networking_kata.command
 
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.whenever
+import it.giannibombelli.social_networking_kata.iClock
 import it.giannibombelli.social_networking_kata.repository.UserRepository
 import it.giannibombelli.social_networking_kata.user_interface.Console
 import it.giannibombelli.social_networking_kata.user_interface.PostFormatter
 import it.giannibombelli.social_networking_kata.user_interface.UserInterface
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import java.time.LocalDateTime
 
 internal class SocialNetworkingCommandFactoryShould {
+    private val now = LocalDateTime.now()
+    private val clock = mock<iClock>()
+    private val userInterface = UserInterface(Console(), PostFormatter(clock))
+    private val commandFactory = SocialNetworkingCommandFactory(UserRepository(), userInterface, clock)
 
-    private val userInterface = UserInterface(Console(), PostFormatter())
-    private val commandFactory = SocialNetworkingCommandFactory(UserRepository(), userInterface)
+    @BeforeEach
+    internal fun setUp() {
+        whenever(clock.now())
+                .thenReturn(now)
+    }
 
     @Test
     fun create_postCommand() {
