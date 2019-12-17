@@ -8,7 +8,7 @@ class UserRepository : Repository<User> {
     override fun getOrCreate(userName: String): User {
         val user = get(userName)
         if (user == null) {
-            val newUser = User(userName, mutableListOf())
+            val newUser = User(userName)
             users.add(newUser)
             return newUser
         }

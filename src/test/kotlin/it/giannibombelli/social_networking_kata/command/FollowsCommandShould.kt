@@ -11,7 +11,7 @@ internal class FollowsCommandShould {
 
     @Test
     fun addFollowedToUser() {
-        val user = User("Bombo", mutableListOf())
+        val user = User("Bombo")
         val userRepository = mock<Repository<User>>()
         whenever(userRepository.getOrCreate("Bombo"))
                 .thenReturn(user)

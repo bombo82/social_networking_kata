@@ -15,7 +15,7 @@ internal class UserShould {
         val clock = mock<IClock>()
         whenever(clock.now())
                 .thenReturn(now)
-        val user = User("Bombo", mutableListOf())
+        val user = User("Bombo")
 
         assertEquals(0, user.posts.size)
         user.newPost("Hello", now)
@@ -26,7 +26,7 @@ internal class UserShould {
 
     @Test
     fun addFollowedUser() {
-        val user = User("Bombo", mutableListOf())
+        val user = User("Bombo")
 
         assertEquals(0, user.followed.size)
         user.addFollowedUser("Bob")
