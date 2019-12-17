@@ -23,4 +23,15 @@ internal class UserShould {
         assertEquals(1, user.posts.size)
         assertEquals(Post("Hello", now), user.posts[0])
     }
+
+    @Test
+    fun addFollowedUser() {
+        val user = User("Bombo", mutableListOf())
+
+        assertEquals(0, user.followed.size)
+        user.addFollowedUser("Bob")
+
+        assertEquals(1, user.followed.size)
+        assertEquals("Bob", user.followed[0])
+    }
 }

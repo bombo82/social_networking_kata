@@ -48,4 +48,12 @@ internal class SocialNetworkingCommandFactoryShould {
         assertNotNull(command)
         assertTrue(command is QuitCommand)
     }
+
+    @Test
+    fun create_followsCommand() {
+        val command = commandFactory.commandFor("Bombo follows Bob")
+
+        assertNotNull(command)
+        assertTrue(command is FollowsCommand)
+    }
 }
