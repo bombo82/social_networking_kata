@@ -66,10 +66,10 @@ object FollowingFeatureSpec : Spek({
             Then("Charlies's wall displayes messages in reverse order") {
                 socialNetworking.commandLoop()
                 inOrder(console) {
-                    verify(console).writeLine("> ${postList[3]} (15 seconds ago)")
-                    verify(console).writeLine("> ${postList[2]} (1 minute ago)")
-                    verify(console).writeLine("> ${postList[1]} (2 minutes ago)")
-                    verify(console).writeLine("> ${postList[0]} (5 minutes ago)")
+                    verify(console).writeLine("> Charlie - ${postList[3]} (15 seconds ago)")
+                    verify(console).writeLine("> Bob - ${postList[2]} (1 minute ago)")
+                    verify(console).writeLine("> Bob - ${postList[1]} (2 minutes ago)")
+                    verify(console).writeLine("> Alice - ${postList[0]} (5 minutes ago)")
                 }
             }
         }
